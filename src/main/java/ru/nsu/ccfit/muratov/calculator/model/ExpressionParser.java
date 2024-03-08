@@ -10,11 +10,11 @@ import java.util.Stack;
 public class ExpressionParser {
     private ExpressionParser() {}
 
-    public static List<Operator> parse(List<Operator> expression) {
+    public static RPNExpression parse(Expression expression) {
         List<Operator> result = new ArrayList<>();
         Stack<Operator> stack = new Stack<>();
 
-        for(Operator operator: expression) {
+        for(Operator operator: expression.getOperators()) { //TODO Demetra rule
             Priority currentPriority = operator.getPriority();
             if(currentPriority == Priority.NUMBER) {
                 result.add(operator);
@@ -28,6 +28,6 @@ public class ExpressionParser {
         while(!stack.isEmpty()) {
             result.add(stack.pop());
         }
-        return result;
+        return new RPNExpression(result);
     }
 }

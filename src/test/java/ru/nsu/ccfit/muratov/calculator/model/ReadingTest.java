@@ -17,8 +17,8 @@ public class ReadingTest {
         InputStream targetStream = new ByteArrayInputStream(exp.getBytes());
 
         ExpressionReader reader = new ExpressionReader(targetStream);
-        List<Operator> operators = reader.extractExpression();
-        for(Operator operator: operators) {
+        Expression operators = reader.extractExpression();
+        for(Operator operator: operators.getOperators()) { //TODO Demetra rule
             System.out.println(operator.getClass().getName());
         }
     }

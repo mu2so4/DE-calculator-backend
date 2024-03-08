@@ -18,7 +18,7 @@ public class ExpressionReader implements AutoCloseable {
         this.inputStream = new BufferedInputStream(inputStream);
     }
 
-    public List<Operator> extractExpression() throws IOException {
+    public Expression extractExpression() throws IOException {
         enum CurrentStatus {
             READING_NUMBER,
             READING_FUNCTION_NAME,
@@ -97,7 +97,7 @@ public class ExpressionReader implements AutoCloseable {
                 operators.add(factory.getOperator(builder.toString()));
             }
         }
-        return operators;
+        return new Expression(operators);
     }
 
     @Override

@@ -24,8 +24,10 @@ public class ParserTest {
         operators.add(new PowerOperator());
         operators.add(new NumberOperator(3));
 
-        List<Operator> parsed = ExpressionParser.parse(operators);
-        for(Operator operator: parsed) {
+        Expression rpn = new Expression(operators);
+
+        RPNExpression parsed = ExpressionParser.parse(rpn);
+        for(Operator operator: parsed.getOperators()) { //TODO Demetra rule
             System.out.println(operator.getClass().getName());
         }
     }
