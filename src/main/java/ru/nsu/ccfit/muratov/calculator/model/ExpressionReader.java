@@ -63,7 +63,12 @@ public class ExpressionReader implements AutoCloseable {
                         builder = new StringBuilder();
                         expressionTokens.add(factory.getOperator(Character.toString(symbol)));
                     }
-                    else if(!isWhitespace) {
+                    else if(isWhitespace) {
+                        status = CurrentStatus.IDLE;
+                        expressionTokens.add(new NumberToken(Double.parseDouble(builder.toString())));
+                        builder = new StringBuilder();
+                    }
+                    else {
                         status = CurrentStatus.READING_FUNCTION_NAME;
                         expressionTokens.add(new NumberToken(Double.parseDouble(builder.toString())));
                         builder = new StringBuilder();
@@ -83,7 +88,12 @@ public class ExpressionReader implements AutoCloseable {
                         builder = new StringBuilder();
                         expressionTokens.add(factory.getOperator(Character.toString(symbol)));
                     }
-                    else if(!isWhitespace) {
+                    else if(isWhitespace) {
+                        status = CurrentStatus.IDLE;
+                        expressionTokens.add(factory.getOperator(builder.toString()));
+                        builder = new StringBuilder();
+                    }
+                    else {
                         builder.append(symbol);
                     }
                 }
