@@ -4,5 +4,6 @@ public enum Priority {
     ADD,
     MULTIPLY,
     POWER,
+    BRACKET,
     NUMBER
 }
