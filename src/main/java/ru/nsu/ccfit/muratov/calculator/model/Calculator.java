@@ -3,6 +3,7 @@ package ru.nsu.ccfit.muratov.calculator.model;
 import ru.nsu.ccfit.muratov.calculator.model.operator.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -55,6 +56,7 @@ public class Calculator {
             NumberToken token = numbers.pop();
             operands.add(token.getValue());
         }
+        Collections.reverse(operands);
         try {
             double evaluationResult = operator.evaluate(operands);
             numbers.push(new NumberToken(evaluationResult));
