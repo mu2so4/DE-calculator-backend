@@ -8,7 +8,7 @@ public class OperatorFactory {
 
     private static final OperatorFactory factory = new OperatorFactory();
 
-    private final Map<String, Operator> denotes;
+    private final Map<String, ExpressionToken> denotes;
     private OperatorFactory() {
         try(OperatorFactoryLoader loader = new OperatorFactoryLoader("operators.fact")) {
             denotes = loader.loadClasses();
@@ -20,7 +20,7 @@ public class OperatorFactory {
         return factory;
     }
 
-    public Operator getOperator(String text) {
+    public ExpressionToken getOperator(String text) {
         return denotes.get(text);
     }
 }

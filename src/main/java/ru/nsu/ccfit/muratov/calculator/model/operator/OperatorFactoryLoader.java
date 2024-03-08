@@ -29,16 +29,16 @@ final class OperatorFactoryLoader implements AutoCloseable {
         }
     }
 
-    public Map<String, Operator> loadClasses() {
-        Map<String, Operator> operatorMap = new HashMap<>();
+    public Map<String, ExpressionToken> loadClasses() {
+        Map<String, ExpressionToken> operatorMap = new HashMap<>();
         while(scanner.hasNext()) {
             String line = scanner.nextLine();
             String[] values = line.split("\\s+");
             String name = values[0];
             String className = values[1];
-            Operator operator;
+            ExpressionToken expressionToken;
             try {
-                operator = (Operator) Class.forName(className).getConstructor().newInstance();
+                expressionToken = (ExpressionToken) Class.forName(className).getConstructor().newInstance();
             }
             catch (ClassNotFoundException | InvocationTargetException | InstantiationException |
                      IllegalAccessException | NoSuchMethodException e) {
@@ -49,7 +49,7 @@ final class OperatorFactoryLoader implements AutoCloseable {
                 logger.severe(() -> String.format("%s is not a subclass for the class Operator", className));
                 continue;
             }
-            operatorMap.put(name, operator);
+            operatorMap.put(name, expressionToken);
         }
         return operatorMap;
     }

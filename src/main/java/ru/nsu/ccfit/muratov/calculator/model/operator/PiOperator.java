@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.muratov.calculator.model.operator;
 
-public class PiOperator extends NumberOperator {
+public final class PiOperator extends NumberToken {
     public PiOperator() {
         super(Math.PI);
     }

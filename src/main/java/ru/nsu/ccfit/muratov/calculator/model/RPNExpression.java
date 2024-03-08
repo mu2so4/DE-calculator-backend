@@ -1,23 +1,23 @@
 package ru.nsu.ccfit.muratov.calculator.model;
 
-import ru.nsu.ccfit.muratov.calculator.model.operator.Operator;
+import ru.nsu.ccfit.muratov.calculator.model.operator.ExpressionToken;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class RPNExpression {
-    private final List<Operator> operators;
+    private final List<ExpressionToken> expressionTokens;
 
-    public RPNExpression(Collection<Operator> operators) {
-        this.operators = new ArrayList<>(operators);
+    public RPNExpression(Collection<ExpressionToken> expressionTokens) {
+        this.expressionTokens = new ArrayList<>(expressionTokens);
     }
 
-    public Operator at(int index) {
-        return operators.get(index);
+    public ExpressionToken at(int index) {
+        return expressionTokens.get(index);
     }
 
-    public List<Operator> getOperators() {
-        return operators;
+    public List<ExpressionToken> getOperators() {
+        return expressionTokens;
     }
 }

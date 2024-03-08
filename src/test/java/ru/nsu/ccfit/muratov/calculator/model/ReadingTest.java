@@ -2,12 +2,11 @@ package ru.nsu.ccfit.muratov.calculator.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.nsu.ccfit.muratov.calculator.model.operator.Operator;
+import ru.nsu.ccfit.muratov.calculator.model.operator.ExpressionToken;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 public class ReadingTest {
     @Test
@@ -18,8 +17,8 @@ public class ReadingTest {
 
         ExpressionReader reader = new ExpressionReader(targetStream);
         Expression operators = reader.extractExpression();
-        for(Operator operator: operators.getOperators()) { //TODO Demetra rule
-            System.out.println(operator.getClass().getName());
+        for(ExpressionToken expressionToken : operators.getOperators()) { //TODO Demetra rule
+            System.out.println(expressionToken.getClass().getName());
         }
     }
 }

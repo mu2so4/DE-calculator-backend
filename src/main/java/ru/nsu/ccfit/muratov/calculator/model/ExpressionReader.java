@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.muratov.calculator.model;
 
-import ru.nsu.ccfit.muratov.calculator.model.operator.NumberOperator;
-import ru.nsu.ccfit.muratov.calculator.model.operator.Operator;
+import ru.nsu.ccfit.muratov.calculator.model.operator.ExpressionToken;
+import ru.nsu.ccfit.muratov.calculator.model.operator.NumberToken;
 import ru.nsu.ccfit.muratov.calculator.model.operator.OperatorFactory;
 
 import java.io.BufferedInputStream;
@@ -26,7 +26,7 @@ public class ExpressionReader implements AutoCloseable {
         }
 
         OperatorFactory factory = OperatorFactory.getInstance();
-        List<Operator> operators = new ArrayList<>();
+        List<ExpressionToken> expressionTokens = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         CurrentStatus status = CurrentStatus.IDLE;
         while(true) {
@@ -46,7 +46,7 @@ public class ExpressionReader implements AutoCloseable {
                         builder.append(symbol);
                     }
                     else if(isBracket) {
-                        operators.add(factory.getOperator(Character.toString(symbol)));
+                        expressionTokens.add(factory.getOperator(Character.toString(symbol)));
                     }
                     else if(!isWhitespace) {
                         status = CurrentStatus.READING_FUNCTION_NAME;
@@ -59,13 +59,13 @@ public class ExpressionReader implements AutoCloseable {
                     }
                     else if(isBracket) {
                         status = CurrentStatus.IDLE;
-                        operators.add(new NumberOperator(Double.parseDouble(builder.toString())));
+                        expressionTokens.add(new NumberToken(Double.parseDouble(builder.toString())));
                         builder = new StringBuilder();
-                        operators.add(factory.getOperator(Character.toString(symbol)));
+                        expressionTokens.add(factory.getOperator(Character.toString(symbol)));
                     }
                     else if(!isWhitespace) {
                         status = CurrentStatus.READING_FUNCTION_NAME;
-                        operators.add(new NumberOperator(Double.parseDouble(builder.toString())));
+                        expressionTokens.add(new NumberToken(Double.parseDouble(builder.toString())));
                         builder = new StringBuilder();
                         builder.append(symbol);
                     }
@@ -73,15 +73,15 @@ public class ExpressionReader implements AutoCloseable {
                 case READING_FUNCTION_NAME -> {
                     if(isDigitSymbol) {
                         status = CurrentStatus.READING_NUMBER;
-                        operators.add(factory.getOperator(builder.toString()));
+                        expressionTokens.add(factory.getOperator(builder.toString()));
                         builder = new StringBuilder();
                         builder.append(symbol);
                     }
                     else if(isBracket) {
                         status = CurrentStatus.IDLE;
-                        operators.add(factory.getOperator(builder.toString()));
+                        expressionTokens.add(factory.getOperator(builder.toString()));
                         builder = new StringBuilder();
-                        operators.add(factory.getOperator(Character.toString(symbol)));
+                        expressionTokens.add(factory.getOperator(Character.toString(symbol)));
                     }
                     else if(!isWhitespace) {
                         builder.append(symbol);
@@ -91,13 +91,13 @@ public class ExpressionReader implements AutoCloseable {
         }
         switch(status) {
             case READING_NUMBER -> {
-                operators.add(new NumberOperator(Double.parseDouble(builder.toString())));
+                expressionTokens.add(new NumberToken(Double.parseDouble(builder.toString())));
             }
             case READING_FUNCTION_NAME -> {
-                operators.add(factory.getOperator(builder.toString()));
+                expressionTokens.add(factory.getOperator(builder.toString()));
             }
         }
-        return new Expression(operators);
+        return new Expression(expressionTokens);
     }
 
     @Override

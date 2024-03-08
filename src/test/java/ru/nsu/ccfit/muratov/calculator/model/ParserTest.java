@@ -11,24 +11,24 @@ public class ParserTest {
     @Test
     @DisplayName("brace-free test")
     void simpleTest() {
-        List<Operator> operators = new ArrayList<>();
-        operators.add(new NumberOperator(2));
+        List<ExpressionToken> operators = new ArrayList<>();
+        operators.add(new NumberToken(2));
         operators.add(new PlusOperator());
-        operators.add(new NumberOperator(6));
+        operators.add(new NumberToken(6));
         operators.add(new MultiplyOperator());
-        operators.add(new NumberOperator(8));
+        operators.add(new NumberToken(8));
         operators.add(new MinusOperator());
-        operators.add(new NumberOperator(4));
+        operators.add(new NumberToken(4));
         operators.add(new MultiplyOperator());
-        operators.add(new NumberOperator(2));
+        operators.add(new NumberToken(2));
         operators.add(new PowerOperator());
-        operators.add(new NumberOperator(3));
+        operators.add(new NumberToken(3));
 
         Expression rpn = new Expression(operators);
 
         RPNExpression parsed = ExpressionParser.parse(rpn);
-        for(Operator operator: parsed.getOperators()) { //TODO Demetra rule
-            System.out.println(operator.getClass().getName());
+        for(ExpressionToken expressionToken : parsed.getOperators()) { //TODO Demetra rule
+            System.out.println(expressionToken.getClass().getName());
         }
     }
 }
