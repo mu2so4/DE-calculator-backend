@@ -33,8 +33,13 @@ public class Calculator {
                     throw new SyntaxException("missed left bracket");
                 }
                 stack.pop();
+                continue;
             }
-            while(!stack.isEmpty() && stack.peek().getPriority().compareTo(currentPriority) >= 0) {
+            while(!stack.isEmpty()) {
+                Priority peekPriority = stack.peek().getPriority();
+                if(peekPriority.compareTo(currentPriority) < 0 || peekPriority == Priority.BRACKET) {
+                    break;
+                }
                 result.add(stack.pop());
             }
             stack.add(expressionToken);
@@ -42,7 +47,7 @@ public class Calculator {
         while(!stack.isEmpty()) {
             result.add(stack.pop());
         }
-        this.expression =  new RPNExpression(result);
+        this.expression = new RPNExpression(result);
     }
 
     public double evaluate() {
