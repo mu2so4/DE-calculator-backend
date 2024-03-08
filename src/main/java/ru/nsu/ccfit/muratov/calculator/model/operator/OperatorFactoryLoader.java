@@ -21,7 +21,7 @@ final class OperatorFactoryLoader implements AutoCloseable {
             if(resource == null) {
                 throw new FileNotFoundException("file not found!");
             }
-                scanner = new Scanner(new File(resource.toURI()));
+            scanner = new Scanner(new File(resource.toURI()));
         }
         catch (FileNotFoundException | URISyntaxException e) {
             logger.severe(e::getMessage);
@@ -33,13 +33,14 @@ final class OperatorFactoryLoader implements AutoCloseable {
         Map<String, Operator> operatorMap = new HashMap<>();
         while(scanner.hasNext()) {
             String line = scanner.nextLine();
-            String[] values = line.split("\\w+");
+            String[] values = line.split("\\s+");
             String name = values[0];
             String className = values[1];
             Operator operator;
             try {
                 operator = (Operator) Class.forName(className).getConstructor().newInstance();
-            } catch (ClassNotFoundException | InvocationTargetException | InstantiationException |
+            }
+            catch (ClassNotFoundException | InvocationTargetException | InstantiationException |
                      IllegalAccessException | NoSuchMethodException e) {
                 logger.severe(e::getMessage);
                 continue;
