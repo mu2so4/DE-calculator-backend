@@ -10,17 +10,17 @@ public class NumberOperator extends Operator {
     }
 
     @Override
-    protected double performEvaluation(List<Double> values) {
+    protected final double performEvaluation(List<Double> values) {
         return value;
     }
 
     @Override
-    public int getProperOperandCount() {
+    public final int getProperOperandCount() {
         return 0;
     }
 
     @Override
-    public Priority getPriority() {
+    public final Priority getPriority() {
         return Priority.NUMBER;
     }
 }
