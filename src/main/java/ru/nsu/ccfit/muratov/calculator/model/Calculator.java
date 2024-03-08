@@ -11,7 +11,7 @@ public class Calculator {
     private final RPNExpression expression;
     private ExpressionStatus status = ExpressionStatus.OK;
 
-    public Calculator(Expression expression) {
+    public Calculator(Expression expression) throws SyntaxException {
         List<ExpressionToken> result = new ArrayList<>();
         Stack<ExpressionToken> stack = new Stack<>();
 
@@ -20,6 +20,19 @@ public class Calculator {
             if(currentPriority == Priority.NUMBER) {
                 result.add(expressionToken);
                 continue;
+            }
+            if(expressionToken instanceof LeftBracketOperator) {
+                stack.push(expressionToken);
+                continue;
+            }
+            if(expressionToken instanceof RightBracketOperator) {
+                while(!stack.isEmpty() && stack.peek().getPriority() != Priority.BRACKET) {
+                    result.add(stack.pop());
+                }
+                if(stack.empty()) {
+                    throw new SyntaxException("missed left bracket");
+                }
+                stack.pop();
             }
             while(!stack.isEmpty() && stack.peek().getPriority().compareTo(currentPriority) >= 0) {
                 result.add(stack.pop());

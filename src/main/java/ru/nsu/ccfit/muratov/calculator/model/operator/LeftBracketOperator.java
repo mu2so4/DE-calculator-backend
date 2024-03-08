@@ -1,17 +1,6 @@
 package ru.nsu.ccfit.muratov.calculator.model.operator;
 
-import java.util.List;
-
-public class LeftBracketOperator extends Operator {
-    @Override
-    protected double performEvaluation(List<Double> values) throws OperatorException {
-        return 0;
-    }
-
-    @Override
-    public int getProperOperandCount() {
-        return 0;
-    }
+public class LeftBracketOperator extends ExpressionToken {
 
     @Override
     public Priority getPriority() {
