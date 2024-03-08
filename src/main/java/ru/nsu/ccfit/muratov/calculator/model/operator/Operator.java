@@ -16,4 +16,6 @@ public abstract class Operator {
     protected abstract double performEvaluation(List<Double> values) throws OperatorException;
 
     public abstract int getProperOperandCount();
+
+    public abstract Priority getPriority();
 }

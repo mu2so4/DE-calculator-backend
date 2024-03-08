@@ -14,4 +14,9 @@ public class PowerOperator extends Operator {
     public int getProperOperandCount() {
         return 2;
     }
+
+    @Override
+    public Priority getPriority() {
+        return Priority.POWER;
+    }
 }

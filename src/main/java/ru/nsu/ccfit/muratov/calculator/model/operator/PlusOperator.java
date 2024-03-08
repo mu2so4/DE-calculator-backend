@@ -12,4 +12,9 @@ public class PlusOperator extends Operator {
     public int getProperOperandCount() {
         return 2;
     }
+
+    @Override
+    public Priority getPriority() {
+        return Priority.ADD;
+    }
 }
