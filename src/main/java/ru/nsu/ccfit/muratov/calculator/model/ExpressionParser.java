@@ -20,7 +20,7 @@ public class ExpressionParser {
                 result.add(operator);
                 continue;
             }
-           while(!stack.isEmpty() && stack.peek().getPriority().compareTo(currentPriority) <= 0) {
+           while(!stack.isEmpty() && stack.peek().getPriority().compareTo(currentPriority) >= 0) {
                result.add(stack.pop());
            }
            stack.add(operator);
