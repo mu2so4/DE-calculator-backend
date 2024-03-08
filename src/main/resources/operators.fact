@@ -1,0 +1,9 @@
++ ru.nsu.ccfit.muratov.calculator.model.operator.PlusOperator
+- ru.nsu.ccfit.muratov.calculator.model.operator.MinusOperator
+* ru.nsu.ccfit.muratov.calculator.model.operator.MultiplyOperator
+/ ru.nsu.ccfit.muratov.calculator.model.operator.DivideOperator
+^ ru.nsu.ccfit.muratov.calculator.model.operator.PowerOperator
+( ru.nsu.ccfit.muratov.calculator.model.operator.LeftBracketOperator
+) ru.nsu.ccfit.muratov.calculator.model.operator.RightBracketOperator
+e ru.nsu.ccfit.muratov.calculator.model.operator.EOperator
+π ru.nsu.ccfit.muratov.calculator.model.operator.PiOperator

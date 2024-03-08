@@ -1,14 +1,19 @@
 package ru.nsu.ccfit.muratov.calculator.model.operator;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class OperatorFactory {
+    private static final Logger logger = Logger.getLogger(OperatorFactory.class.getCanonicalName());
+
     private static final OperatorFactory factory = new OperatorFactory();
 
-    private final Map<String, Operator> denotes = new HashMap<>();
+    private final Map<String, Operator> denotes;
     private OperatorFactory() {
-        //TODO importing
+        try(OperatorFactoryLoader loader = new OperatorFactoryLoader("operators.fact")) {
+            denotes = loader.loadClasses();
+        }
+        logger.info("OperatorFactory loaded");
     }
 
     public static OperatorFactory getInstance() {
