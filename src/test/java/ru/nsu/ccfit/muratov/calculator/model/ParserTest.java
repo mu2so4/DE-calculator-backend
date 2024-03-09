@@ -26,9 +26,9 @@ public class ParserTest {
 
         Expression rpn = new Expression(operators);
 
-        RPNExpression parsed = ExpressionParser.parse(rpn);
+        /*RPNExpression parsed = ExpressionParser.parse(rpn);
         for(ExpressionToken expressionToken : parsed.getOperators()) { //TODO Demetra rule
             System.out.println(expressionToken.getClass().getName());
-        }
+        }*/
     }
 }

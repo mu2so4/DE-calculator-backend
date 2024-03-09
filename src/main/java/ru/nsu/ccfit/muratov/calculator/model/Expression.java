@@ -11,10 +11,6 @@ public class Expression {
         this.expressionTokens = new ArrayList<>(expressionTokens);
     }
 
-    public ExpressionToken at(int index) {
-        return expressionTokens.get(index);
-    }
-
     public List<ExpressionToken> getOperators() {
         return expressionTokens;
     }
