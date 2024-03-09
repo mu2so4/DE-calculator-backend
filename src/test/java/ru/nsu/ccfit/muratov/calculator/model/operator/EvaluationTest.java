@@ -7,18 +7,13 @@ import ru.nsu.ccfit.muratov.calculator.model.Expression;
 import ru.nsu.ccfit.muratov.calculator.model.ExpressionReader;
 import ru.nsu.ccfit.muratov.calculator.model.SyntaxException;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 public class EvaluationTest {
     @Test
     @DisplayName("simple evaluation test")
-    public void simpleTest() throws IOException, SyntaxException {
+    public void simpleTest() throws SyntaxException {
         //String str = "2 + 6 * 8 - 4 * 2 ^ 3";
         String str = "e * 4.27";
-        InputStream inputStream = new ByteArrayInputStream(str.getBytes());
-        ExpressionReader reader = new ExpressionReader(inputStream);
+        ExpressionReader reader = new ExpressionReader(str);
         Expression expression = reader.extractExpression();
         Calculator calculator = new Calculator(expression);
         double result = calculator.evaluate();

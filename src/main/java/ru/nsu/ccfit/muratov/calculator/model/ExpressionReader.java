@@ -4,21 +4,18 @@ import ru.nsu.ccfit.muratov.calculator.model.operator.ExpressionToken;
 import ru.nsu.ccfit.muratov.calculator.model.operator.NumberToken;
 import ru.nsu.ccfit.muratov.calculator.model.operator.OperatorFactory;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpressionReader implements AutoCloseable {
+public class ExpressionReader {
 
-    private final BufferedInputStream inputStream;
+    private final String rawExpression;
 
-    public ExpressionReader(InputStream inputStream) {
-        this.inputStream = new BufferedInputStream(inputStream);
+    public ExpressionReader(String expression) {
+        rawExpression = expression;
     }
 
-    public Expression extractExpression() throws IOException {
+    public Expression extractExpression() {
         enum CurrentStatus {
             READING_NUMBER,
             READING_FUNCTION_NAME,
@@ -29,12 +26,7 @@ public class ExpressionReader implements AutoCloseable {
         List<ExpressionToken> expressionTokens = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         CurrentStatus status = CurrentStatus.IDLE;
-        while(true) {
-            int currentCodepoint = inputStream.read();
-            if(currentCodepoint < 0) {
-                break;
-            }
-            char symbol = (char) currentCodepoint;
+        for(char symbol: rawExpression.toCharArray()) {
             boolean isDigitSymbol = Character.isDigit(symbol) || symbol == '.';
             boolean isBracket = symbol == '(' || symbol == ')';
             boolean isWhitespace = Character.isWhitespace(symbol);
@@ -100,18 +92,11 @@ public class ExpressionReader implements AutoCloseable {
             }
         }
         switch(status) {
-            case READING_NUMBER -> {
-                expressionTokens.add(new NumberToken(Double.parseDouble(builder.toString())));
-            }
-            case READING_FUNCTION_NAME -> {
-                expressionTokens.add(factory.getOperator(builder.toString()));
-            }
+            case READING_NUMBER ->
+                    expressionTokens.add(new NumberToken(Double.parseDouble(builder.toString())));
+            case READING_FUNCTION_NAME ->
+                    expressionTokens.add(factory.getOperator(builder.toString()));
         }
         return new Expression(expressionTokens);
-    }
-
-    @Override
-    public void close() throws IOException {
-        inputStream.close();
     }
 }
