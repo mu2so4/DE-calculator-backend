@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.muratov.calculator.model.operator;
 
+import ru.nsu.ccfit.muratov.calculator.model.SyntaxException;
+
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -20,7 +22,11 @@ public class OperatorFactory {
         return factory;
     }
 
-    public ExpressionToken getOperator(String text) {
-        return denotes.get(text);
+    public ExpressionToken getOperator(String text) throws SyntaxException {
+        ExpressionToken token = denotes.get(text);
+        if(token == null) {
+            throw new SyntaxException(String.format("'%s': no such operator", text));
+        }
+        return token;
     }
 }

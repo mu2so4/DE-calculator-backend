@@ -15,7 +15,7 @@ public class ExpressionReader {
         rawExpression = expression;
     }
 
-    public Expression extractExpression() {
+    public Expression extractExpression() throws SyntaxException {
         enum CurrentStatus {
             READING_NUMBER,
             READING_FUNCTION_NAME,

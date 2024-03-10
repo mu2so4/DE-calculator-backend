@@ -7,7 +7,7 @@ import ru.nsu.ccfit.muratov.calculator.model.operator.ExpressionToken;
 public class ReadingTest {
     @Test
     @DisplayName("simple test")
-    void simpleTest() {
+    void simpleTest() throws SyntaxException {
         String exp = "2 + 6*8 - 4 *2^3";
 
         ExpressionReader reader = new ExpressionReader(exp);
