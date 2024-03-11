@@ -17,14 +17,14 @@ public class ParserTest {
         operators.add(new NumberToken(6));
         operators.add(new MultiplyOperator());
         operators.add(new NumberToken(8));
-        operators.add(new MinusOperator());
+        operators.add(new MinusBinaryOperator());
         operators.add(new NumberToken(4));
         operators.add(new MultiplyOperator());
         operators.add(new NumberToken(2));
         operators.add(new PowerOperator());
         operators.add(new NumberToken(3));
 
-        Expression rpn = new Expression(operators);
+        RPNExpression rpn = new RPNExpression(operators);
 
         /*RPNExpression parsed = ExpressionParser.parse(rpn);
         for(ExpressionToken expressionToken : parsed.getOperators()) { //TODO Demetra rule

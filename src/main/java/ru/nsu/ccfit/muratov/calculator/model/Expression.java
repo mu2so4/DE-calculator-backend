@@ -1,17 +1,19 @@
 package ru.nsu.ccfit.muratov.calculator.model;
 
-import ru.nsu.ccfit.muratov.calculator.model.operator.ExpressionToken;
+import ru.nsu.ccfit.muratov.calculator.model.raw.RawToken;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class Expression {
-    private final List<ExpressionToken> expressionTokens;
+    private final List<RawToken> rawTokens;
 
-    public Expression(Collection<ExpressionToken> expressionTokens) {
-        this.expressionTokens = new ArrayList<>(expressionTokens);
+    public Expression(Collection<RawToken> expressionTokens) {
+        this.rawTokens = new ArrayList<>(expressionTokens);
     }
 
-    public List<ExpressionToken> getOperators() {
-        return expressionTokens;
+    public List<RawToken> getRawTokens() {
+        return rawTokens;
     }
 }

@@ -1,10 +1,8 @@
 package ru.nsu.ccfit.muratov.calculator.model.operator;
 
-import ru.nsu.ccfit.muratov.calculator.model.raw.Priority;
-
 import java.util.List;
 
-public class MinusOperator extends Operator {
+public class MinusBinaryOperator extends Operator {
     @Override
     protected double performEvaluation(List<Double> values) {
         return values.get(0) - values.get(1);

@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.muratov.calculator.model.operator;
+package ru.nsu.ccfit.muratov.calculator.model.raw;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,12 +10,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-final class OperatorFactoryLoader implements AutoCloseable {
+final class RawTokenFactoryLoader implements AutoCloseable {
     private final Scanner scanner;
 
-    private static final Logger logger = Logger.getLogger(OperatorFactoryLoader.class.getCanonicalName());
+    private static final Logger logger = Logger.getLogger(RawTokenFactoryLoader.class.getCanonicalName());
 
-    public OperatorFactoryLoader(String filename) {
+    public RawTokenFactoryLoader(String filename) {
         URL resource = getClass().getClassLoader().getResource(filename);
         try {
             if(resource == null) {
@@ -29,16 +29,16 @@ final class OperatorFactoryLoader implements AutoCloseable {
         }
     }
 
-    public Map<String, ExpressionToken> loadClasses() {
-        Map<String, ExpressionToken> operatorMap = new HashMap<>();
+    public Map<String, RawToken> loadClasses() {
+        Map<String, RawToken> operatorMap = new HashMap<>();
         while(scanner.hasNext()) {
             String line = scanner.nextLine();
             String[] values = line.split("\\s+");
             String name = values[0];
             String className = values[1];
-            ExpressionToken expressionToken;
+            RawToken rawToken;
             try {
-                expressionToken = (ExpressionToken) Class.forName(className).getConstructor().newInstance();
+                rawToken = (RawToken) Class.forName(className).getConstructor().newInstance();
             }
             catch (ClassNotFoundException | InvocationTargetException | InstantiationException |
                      IllegalAccessException | NoSuchMethodException e) {
@@ -49,7 +49,7 @@ final class OperatorFactoryLoader implements AutoCloseable {
                 logger.severe(() -> String.format("%s is not a subclass for the class Operator", className));
                 continue;
             }
-            operatorMap.put(name, expressionToken);
+            operatorMap.put(name, rawToken);
         }
         return operatorMap;
     }

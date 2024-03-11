@@ -1,7 +1,5 @@
 package ru.nsu.ccfit.muratov.calculator.model.operator;
 
-import java.util.List;
-
 public class NumberToken extends ExpressionToken {
     private final double value;
 
