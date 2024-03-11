@@ -1,5 +1,7 @@
 package ru.nsu.ccfit.muratov.calculator.model.operator;
 
+import ru.nsu.ccfit.muratov.calculator.model.raw.Priority;
+
 import java.util.List;
 
 public class MinusOperator extends Operator {

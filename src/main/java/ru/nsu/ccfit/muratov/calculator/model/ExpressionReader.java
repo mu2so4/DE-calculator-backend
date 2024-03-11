@@ -7,15 +7,9 @@ import ru.nsu.ccfit.muratov.calculator.model.operator.OperatorFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpressionReader {
+class ExpressionReader {
 
-    private final String rawExpression;
-
-    public ExpressionReader(String expression) {
-        rawExpression = expression;
-    }
-
-    public Expression extractExpression() throws SyntaxException {
+    public Expression extractExpression(String rawExpression) throws SyntaxException {
         enum CurrentStatus {
             READING_NUMBER,
             READING_FUNCTION_NAME,

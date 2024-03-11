@@ -2,7 +2,7 @@ package ru.nsu.ccfit.muratov.calculator.model;
 
 import ru.nsu.ccfit.muratov.calculator.model.operator.ExpressionToken;
 import ru.nsu.ccfit.muratov.calculator.model.operator.LeftBracketOperator;
-import ru.nsu.ccfit.muratov.calculator.model.operator.Priority;
+import ru.nsu.ccfit.muratov.calculator.model.raw.Priority;
 import ru.nsu.ccfit.muratov.calculator.model.operator.RightBracketOperator;
 
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Stack;
 
 class ExpressionConverter {
-    private ExpressionConverter() {}
+    public ExpressionConverter() {}
 
-    public static RPNExpression convert(Expression expression) throws SyntaxException {
+    public RPNExpression convert(Expression expression) throws SyntaxException {
         List<ExpressionToken> result = new ArrayList<>();
         Stack<ExpressionToken> stack = new Stack<>();
 

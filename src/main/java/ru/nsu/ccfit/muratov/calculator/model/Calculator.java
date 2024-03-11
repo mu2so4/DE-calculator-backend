@@ -8,15 +8,24 @@ import java.util.List;
 import java.util.Stack;
 
 public class Calculator {
-    private final RPNExpression expression;
+    private final ExpressionReader reader = new ExpressionReader();
+
+    private final ExpressionConverter converter = new ExpressionConverter();
+
     private ExpressionStatus status = ExpressionStatus.OK;
 
-    public Calculator(Expression expression) throws SyntaxException {
-        this.expression = ExpressionConverter.convert(expression);
-    }
-
-    public double evaluate() {
+    public Double evaluate(String strExpression) {
+        RPNExpression expression;
+        try {
+            Expression rawExpression = reader.extractExpression(strExpression);
+            expression = converter.convert(rawExpression);
+        }
+        catch(SyntaxException e) {
+            status = ExpressionStatus.SYNTAX_ERROR;
+            return null;
+        }
         Stack<NumberToken> numbers = new Stack<>();
+        status = ExpressionStatus.OK;
 
         for(ExpressionToken expressionToken : expression.getOperators()) { //TODO Demetra rule
             if(expressionToken instanceof NumberToken) {
