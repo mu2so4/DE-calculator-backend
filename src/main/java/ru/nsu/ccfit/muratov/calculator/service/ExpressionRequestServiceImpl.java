@@ -1,6 +1,8 @@
 package ru.nsu.ccfit.muratov.calculator.service;
 
 import org.springframework.stereotype.Service;
+import ru.nsu.ccfit.muratov.calculator.dto.EvaluatedResultDTO;
+import ru.nsu.ccfit.muratov.calculator.dto.ExpressionDTO;
 import ru.nsu.ccfit.muratov.calculator.model.*;
 
 import java.util.logging.Logger;
@@ -10,7 +12,7 @@ public class ExpressionRequestServiceImpl implements ExpressionRequestService {
     private static final Logger logger = Logger.getLogger(ExpressionRequestServiceImpl.class.getCanonicalName());
 
     @Override
-    public EvaluatedResponse evaluate(ExpressionRequest request) {
+    public EvaluatedResultDTO evaluate(ExpressionDTO request) {
         String strExpression = request.getExpression();
         ExpressionReader reader = new ExpressionReader(strExpression);
         Calculator calculator;
@@ -20,9 +22,9 @@ public class ExpressionRequestServiceImpl implements ExpressionRequestService {
         }
         catch(SyntaxException e) {
             logger.severe(e::getMessage);
-            return new EvaluatedResponse(-1); //TODO replace
+            return new EvaluatedResultDTO(-1); //TODO replace
         }
         double result = calculator.evaluate();
-        return new EvaluatedResponse(result);
+        return new EvaluatedResultDTO(result);
     }
 }

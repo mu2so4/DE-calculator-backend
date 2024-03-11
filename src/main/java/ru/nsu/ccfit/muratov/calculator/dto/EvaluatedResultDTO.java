@@ -1,9 +1,9 @@
-package ru.nsu.ccfit.muratov.calculator.model;
+package ru.nsu.ccfit.muratov.calculator.dto;
 
-public class EvaluatedResponse {
+public class EvaluatedResultDTO {
     private double result;
 
-    public EvaluatedResponse(double result) {
+    public EvaluatedResultDTO(double result) {
         this.result = result;
     }
 

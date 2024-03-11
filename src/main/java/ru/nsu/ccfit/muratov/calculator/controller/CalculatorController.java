@@ -2,8 +2,8 @@ package ru.nsu.ccfit.muratov.calculator.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.nsu.ccfit.muratov.calculator.model.EvaluatedResponse;
-import ru.nsu.ccfit.muratov.calculator.model.ExpressionRequest;
+import ru.nsu.ccfit.muratov.calculator.dto.EvaluatedResultDTO;
+import ru.nsu.ccfit.muratov.calculator.dto.ExpressionDTO;
 import ru.nsu.ccfit.muratov.calculator.service.ExpressionRequestService;
 
 @RestController
@@ -13,7 +13,7 @@ public class CalculatorController {
 
     @CrossOrigin
     @PostMapping(value = "/evaluate", consumes = "application/json", produces = "application/json")
-    public EvaluatedResponse evaluate(@RequestBody ExpressionRequest request) {
+    public EvaluatedResultDTO evaluate(@RequestBody ExpressionDTO request) {
         return service.evaluate(request);
     }
 }

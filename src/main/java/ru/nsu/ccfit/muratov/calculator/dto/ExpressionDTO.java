@@ -1,11 +1,11 @@
-package ru.nsu.ccfit.muratov.calculator.model;
+package ru.nsu.ccfit.muratov.calculator.dto;
 
-public class ExpressionRequest {
+public class ExpressionDTO {
     private String expression;
 
-    public ExpressionRequest() {}
+    public ExpressionDTO() {}
 
-    public ExpressionRequest(String expression) {
+    public ExpressionDTO(String expression) {
         this.expression = expression;
     }
 

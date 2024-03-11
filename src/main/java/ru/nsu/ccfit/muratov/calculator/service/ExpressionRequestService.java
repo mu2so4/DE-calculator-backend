@@ -1,8 +1,8 @@
 package ru.nsu.ccfit.muratov.calculator.service;
 
-import ru.nsu.ccfit.muratov.calculator.model.EvaluatedResponse;
-import ru.nsu.ccfit.muratov.calculator.model.ExpressionRequest;
+import ru.nsu.ccfit.muratov.calculator.dto.EvaluatedResultDTO;
+import ru.nsu.ccfit.muratov.calculator.dto.ExpressionDTO;
 
 public interface ExpressionRequestService {
-    EvaluatedResponse evaluate(ExpressionRequest request);
+    EvaluatedResultDTO evaluate(ExpressionDTO request);
 }
