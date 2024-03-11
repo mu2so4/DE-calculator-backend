@@ -46,7 +46,7 @@ final class RawTokenFactoryLoader implements AutoCloseable {
                 continue;
             }
             catch (ClassCastException e) {
-                logger.severe(() -> String.format("%s is not a subclass for the class Operator", className));
+                logger.severe(() -> String.format("%s is not a subclass for the class RawToken", className));
                 continue;
             }
             operatorMap.put(name, rawToken);

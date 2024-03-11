@@ -25,7 +25,7 @@ class ExpressionConverter {
         List<ExpressionToken> expressionTokens = new ArrayList<>();
         for(int index = 0; index < rawTokens.size(); index++) {
             RawToken token = rawTokens.get(index);
-            expressionTokens.add(token.convert(expression, index));
+            expressionTokens.add(token.convert(expressionTokens, index));
         }
         return expressionTokens;
     }
