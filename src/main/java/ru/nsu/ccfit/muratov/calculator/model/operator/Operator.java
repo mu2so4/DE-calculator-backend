@@ -2,7 +2,7 @@ package ru.nsu.ccfit.muratov.calculator.model.operator;
 
 import java.util.List;
 
-public abstract class Operator extends ExpressionToken {
+public abstract class Operator implements ExpressionToken {
     public final double evaluate(List<Double> values) throws OperatorException {
         //check if we got proper count of operands for some action
         if(values.size() != getProperOperandCount()) {

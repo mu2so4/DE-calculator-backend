@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.muratov.calculator.model.operator;
 
-public class NumberToken extends ExpressionToken {
+public class NumberToken implements ExpressionToken {
     private final double value;
 
     public NumberToken(double value) {
