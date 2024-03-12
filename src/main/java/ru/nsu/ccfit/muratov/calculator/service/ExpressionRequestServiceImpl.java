@@ -16,6 +16,7 @@ public class ExpressionRequestServiceImpl implements ExpressionRequestService {
         String strExpression = request.getExpression();
         Calculator calculator = new Calculator();
         double result = calculator.evaluate(strExpression);
-        return new EvaluatedResultDTO(result);
+        String status = calculator.getStatus();
+        return new EvaluatedResultDTO(status, result);
     }
 }

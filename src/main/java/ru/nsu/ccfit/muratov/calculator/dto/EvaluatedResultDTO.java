@@ -1,17 +1,29 @@
 package ru.nsu.ccfit.muratov.calculator.dto;
 
 public class EvaluatedResultDTO {
-    private double result;
+    private String status;
+    private double value;
 
-    public EvaluatedResultDTO(double result) {
-        this.result = result;
+    public EvaluatedResultDTO() {}
+
+    public EvaluatedResultDTO(String status, double value) {
+        this.value = value;
+        this.status = status;
     }
 
-    public double getResult() {
-        return result;
+    public double getValue() {
+        return value;
     }
 
-    public void setResult(double result) {
-        this.result = result;
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

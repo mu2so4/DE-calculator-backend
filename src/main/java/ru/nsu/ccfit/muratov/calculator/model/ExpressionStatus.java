@@ -1,17 +1,19 @@
 package ru.nsu.ccfit.muratov.calculator.model;
 
 public enum ExpressionStatus {
-    INVALID_FIRST(0),
-    FIRST(1),
-    OK(1),
-    SYNTAX_ERROR(2),
-    DIVISION_BY_ZERO(3),
-    NAN(4),
-    LAST(5);
+    OK("ok"),
+    SYNTAX_ERROR("syntax error"),
+    DIVISION_BY_ZERO("division by zero"),
+    NAN("NaN"),
+    INFINITY("infinity");
 
-    private int value;
+    private final String message;
 
-    ExpressionStatus(int value) {
-        this.value = value;
+    ExpressionStatus(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
